@@ -28,7 +28,7 @@ materials = [
     {
         "MaterialName": "Vanilla Extract",
         "UOM": "Ltr",
-        "Description": "Used ------in vanilla ice cream"
+        "Description": "Used ---------in vanilla ice cream"
     }
 ]
 
