@@ -28,12 +28,7 @@ materials = [
     {
         "MaterialName": "Vanilla Extract",
         "UOM": "Ltr",
-        "Description": "Used in vanilla ice cream"
-    },
-    {
-        "MaterialName": "Waffle Cone",
-        "UOM": "Pcs",
-        "Description": "Cone for serving ice cream"
+        "Description": "Used ---------in vanilla ice cream"
     }
 ]
 
