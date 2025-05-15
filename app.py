@@ -32,6 +32,10 @@ materials = [
     }
 ]
 
+@app.route('/')
+def home():
+    return 'Welcome to the Flask Materials API!'
+
 @app.route('/api/materials', methods=['GET'])
 def get_materials():
     return jsonify(materials)
