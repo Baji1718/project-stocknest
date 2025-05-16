@@ -115,6 +115,32 @@ def order_details():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+# ✅ Inventory fetcher
+def get_inventory_from_db():
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT materialname, quantity FROM inventory")
+        rows = cursor.fetchall()
+        inventory = [
+            {
+                "MaterialName": row[0],
+                "Quantity": float(row[1])
+            }
+            for row in rows
+        ]
+        cursor.close()
+        conn.close()
+        return inventory
+    except Exception as e:
+        return {"error": str(e)}
+
+# ✅ Inventory API
+@app.route('/api/inventory', methods=['GET'])
+def inventory():
+    result = get_inventory_from_db()
+    return jsonify(result)
+
 # ✅ Run server
 if __name__ == '__main__':
     import os
