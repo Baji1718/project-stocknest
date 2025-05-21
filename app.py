@@ -42,7 +42,7 @@ def get_materials_from_db():
         conn.close()
         return materials
     except Exception as e:
-        return {"error": str(e)}
+        return {"message": str(e)}
 
 # ✅ Material master API
 @app.route('/api/materials', methods=['GET'])
@@ -64,7 +64,7 @@ def inward_order():
         conn.close()
         return jsonify({'message': result}), 200
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'message': str(e)}), 500
 
 # ✅ Order summary fetcher
 def get_order_summary_from_db():
@@ -85,7 +85,7 @@ def get_order_summary_from_db():
         conn.close()
         return summary
     except Exception as e:
-        return {"error": str(e)}
+        return {"message": str(e)}
 
 # ✅ Order summary API
 @app.route('/api/order-summary', methods=['GET'])
@@ -113,7 +113,7 @@ def order_details():
         conn.close()
         return jsonify(details), 200
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'message': str(e)}), 500
 
 # ✅ Inventory fetcher
 def get_inventory_from_db():
@@ -133,7 +133,7 @@ def get_inventory_from_db():
         conn.close()
         return inventory
     except Exception as e:
-        return {"error": str(e)}
+        return {"message": str(e)}
 
 # ✅ Inventory API
 @app.route('/api/inventory', methods=['GET'])
@@ -161,11 +161,11 @@ def delivery_order():
 
     except psycopg2.Error as db_error:
         # Return detailed database error if it's a raised exception from the procedure
-        return jsonify({'error': str(db_error).split('\n')[0]}), 400
+        return jsonify({'message': str(db_error).split('\n')[0]}), 400
 
     except Exception as e:
         # Catch-all for unexpected errors
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'message': str(e)}), 500
 
 @app.route('/api/delivery-order-summary', methods=['GET'])
 def delivery_order_summary():
@@ -193,7 +193,7 @@ def delivery_order_summary():
         return jsonify(summary), 200
     
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'message': str(e)}), 500
 
 @app.route('/api/delivery-order-details', methods=['POST'])
 def delivery_order_details():
@@ -201,7 +201,7 @@ def delivery_order_details():
         data = request.get_json()
         delivery_order_name = data.get('DeliveryOrderName')
         if not delivery_order_name:
-            return jsonify({'error': 'DeliveryOrderName is required'}), 400
+            return jsonify({'message': 'DeliveryOrderName is required'}), 400
         
         # Prepare JSON input as expected by the SP (JSON array with one object)
         json_input = json.dumps([{"DeliveryOrderName": delivery_order_name}])
@@ -227,7 +227,7 @@ def delivery_order_details():
         return jsonify(details), 200
     
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'message': str(e)}), 500
 
 
 
